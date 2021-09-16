@@ -2,14 +2,13 @@ let playerName = "";
 let playerInput;
 var playerScore = 0;
 
+let aiInput;
+
 const entryArr = ["rock","paper","scissors"];
 let winMessage = "\n\nYou win ! :D\nPlay again ?";
 let loseMessage = "\n\nYou lose :(\nPlay again ?";
 let drawMessage = "\n\nIt's a draw !";
 let leaveMessage = "\n\nSee you soon ! :)";
-
-
-let aiInput;
 
 // Initialization
 alert("Welcome to Jules's Shi Fu Mi game !");
@@ -30,7 +29,7 @@ function gameLoop(){
 // Value is returned to a playerName variable.
 function askName(){
     let name = prompt("What is your name ? ( must be between 2 and 20 characters. )");
-    if (( name.length < 2 || name.length > 20)){
+    if ( name.length < 2 || name.length > 20 || name === undefined){
         alert("Name is incorrect. Please enter your name again");
         askName();
     } else {
@@ -64,6 +63,8 @@ function aiShiFuMi(){
 function compareShiFuMi(playerSFM,aiSFM){
     // 0 = rock / 1 = paper / 2 = scissors
     // if player win or lose a confirm prompt ask him if he wants to play again or leave
+    // For some reason using ${} to put playerScore in the message string doesn't update the score.
+    // TODO find a wind to clean up this spaghetti code. Use loop or recursive func maybe ?
     if (playerSFM === aiSFM){
         alert("Current Score : " + playerScore + drawMessage);
         gameLoop(); // if draw go back to main loop
