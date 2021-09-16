@@ -1,12 +1,12 @@
 let playerName = "";
 let playerInput;
-let playerScore = 0;
+var playerScore = 0;
 
 const entryArr = ["rock","paper","scissors"];
-const winMessage = `Current Score : ${playerScore}\n\nYou win ! :D\nPlay again ?`;
-const loseMessage = `Current Score : ${playerScore}\n\nYou lose :(\nPlay again ?`;
-const drawMessage = `Current Score : ${playerScore}\n\nIt's a draw !`;
-const leaveMessage = `See you soon ! :)\n\nYou score : ${playerScore}`;
+let winMessage = "\n\nYou win ! :D\nPlay again ?";
+let loseMessage = "\n\nYou lose :(\nPlay again ?";
+let drawMessage = "\n\nIt's a draw !";
+let leaveMessage = "\n\nSee you soon ! :)";
 
 
 let aiInput;
@@ -17,6 +17,14 @@ playerName = askName();
 alert(`Welcome ${playerName} !\nYou will play Shi Fu Mi against my super intelligent AI today !`);
 // Loop
 gameLoop();  
+
+
+// Game Loop's logic goes here
+function gameLoop(){    
+    playerInput = askShiFuMi();
+    aiInput = aiShiFuMi();
+    compareShiFuMi(playerInput,aiInput);
+}
 
 // Ask name and restrict user to a name between 2 and 20 chars. 
 // Value is returned to a playerName variable.
@@ -47,85 +55,80 @@ function askShiFuMi(){
 
 // Returns rock,paper,scissors randomly
 function aiShiFuMi(){
-    let random = Math.round(Math.random() * 3);
+    let random = Math.floor(Math.random() * 3);
     return entryArr[random];
 }
 
-// Check player and ai input and returns a winner or draw
+// Check player and ai input and update score
 // Returns either "win" "draw" "lose"
 function compareShiFuMi(playerSFM,aiSFM){
     // 0 = rock / 1 = paper / 2 = scissors
     // if player win or lose a confirm prompt ask him if he wants to play again or leave
     if (playerSFM === aiSFM){
-        alert(drawMessage);
+        alert("Current Score : " + playerScore + drawMessage);
         gameLoop(); // if draw go back to main loop
     }
     else if (playerSFM === entryArr[0]){
         if (aiSFM === entryArr[1]){
-            let checkBox = confirm(loseMessage); 
+            let checkBox = confirm("Current Score : " + playerScore + loseMessage); 
             if (checkBox){
                 gameLoop();
             } else {
-                alert(leaveMessage);
+                alert("Current Score : " + playerScore + leaveMessage);
                 return;
             }
         } else if (aiSFM === entryArr[2]){
             playerScore++;
-            let checkBox = confirm(winMessage);
+            let checkBox = confirm("Current Score : " + playerScore + winMessage);
             if (checkBox){
                 gameLoop();
             } else {
-                alert(leaveMessage);
+                alert("Current Score : " + playerScore + leaveMessage);
                 return;
             }
         }
     }
     else if (playerSFM === entryArr[1]){
         if (aiSFM === entryArr[2]){
-            let checkBox = confirm(loseMessage);
+            let checkBox = confirm("Current Score : " + playerScore + loseMessage);
             if (checkBox){
                 gameLoop();
             } else {
-                alert(leaveMessage);
+                alert("Current Score : " + playerScore + leaveMessage);
                 return;
             }
         } else if (aiSFM === entryArr[0]){
             playerScore++
-            let checkBox = confirm(winMessage);
+            let checkBox = confirm("Current Score : " + playerScore + winMessage);
             if (checkBox){
                 gameLoop();
             } else {
-                alert(leaveMessage);
+                alert("Current Score : " + playerScore + leaveMessage);
                 return;
             }
         }
     }
     else if (playerSFM === entryArr[2]){
         if (aiSFM === entryArr[0]){
-            let checkBox = confirm(loseMessage);
+            let checkBox = confirm("Current Score : " + playerScore + loseMessage);
             if (checkBox){
                 gameLoop();
             } else {
-                alert("See you again !");
+                alert("Current Score : " + playerScore + leaveMessage);
                 return;
             }
         } else if (aiSFM === entryArr[1]){
             playerScore++;
-            let checkBox = confirm(winMessage);
+            let checkBox = confirm("Current Score : " + playerScore + winMessage);
             if (checkBox){
                 gameLoop();
             } else {
-                alert("See you again !");
+                alert("Current Score : " + playerScore + leaveMessage);
                 return;
             }
         }
     } 
 }
 
-// Game Loop's logic goes here
-function gameLoop(){    
-    playerInput = askShiFuMi();
-    aiInput = aiShiFuMi();
-    compareShiFuMi(playerInput,aiInput);
-}
+
 
