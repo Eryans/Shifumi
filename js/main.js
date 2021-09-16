@@ -1,3 +1,6 @@
+let playerName = "";
+let playerInput;
+let playerScore = 0;
 
 const entryArr = ["rock","paper","scissors"];
 const winMessage = `Current Score : ${playerScore}\n\nYou win ! :D\nPlay again ?`;
@@ -5,9 +8,6 @@ const loseMessage = `Current Score : ${playerScore}\n\nYou lose :(\nPlay again ?
 const drawMessage = `Current Score : ${playerScore}\n\nIt's a draw !`;
 const leaveMessage = `See you soon ! :)\n\nYou score : ${playerScore}`;
 
-let playerName = "";
-let playerInput;
-let playerScore = 0;
 
 let aiInput;
 
@@ -70,6 +70,7 @@ function compareShiFuMi(playerSFM,aiSFM){
                 return;
             }
         } else if (aiSFM === entryArr[2]){
+            playerScore++;
             let checkBox = confirm(winMessage);
             if (checkBox){
                 gameLoop();
@@ -89,7 +90,8 @@ function compareShiFuMi(playerSFM,aiSFM){
                 return;
             }
         } else if (aiSFM === entryArr[0]){
-            let checkBox = confirm(loseMessage);
+            playerScore++
+            let checkBox = confirm(winMessage);
             if (checkBox){
                 gameLoop();
             } else {
@@ -108,6 +110,7 @@ function compareShiFuMi(playerSFM,aiSFM){
                 return;
             }
         } else if (aiSFM === entryArr[1]){
+            playerScore++;
             let checkBox = confirm(winMessage);
             if (checkBox){
                 gameLoop();
