@@ -36,7 +36,8 @@ function askShiFuMi(){
 
 // This fucking returns rock,paper,scissors randomly
 function aiShiFuMi(){
-
+    let random = Math.round(Math.random() * 3);
+    return entryArr[random];
 }
 
 // Game Loop's logic goes here
