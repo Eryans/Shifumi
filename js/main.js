@@ -1,10 +1,15 @@
 let playerName = "";
 let playerInput;
 let playerScore = 0;
+let playerBigScore = 0;
 
 let aiInput;
 let aiScore = 0;
+let aiBigScore = 0;
 
+let turn = 0;
+let round = 0;
+const roundToWin = 3;
 const entryArr = ["rock","paper","scissors"];
 const entryCheck = [{
     entry : entryArr[0],
@@ -20,10 +25,13 @@ const entryCheck = [{
     lose : entryArr[0]
 }];
 
-let winMessage = "\n\nYou win ! :D\nPlay again ?";
-let loseMessage = "\n\nYou lose :(\nPlay again ?";
-let drawMessage = "\n\nIt's a draw !";
-let leaveMessage = "\n\nSee you soon ! :)";
+const winMessage = "\n\nYou win this round !";
+const loseMessage = "\n\nYou lose this round !";
+const drawMessage = "\n\nIt's a draw !";
+const leaveMessage = "\n\nSee you soon ! :)";
+const plAgMessage = "\n\nDo you wish tou play again ?";
+const bigWinMessage = "You win the game ! Congratulation !\n\nDo you want to play again ?";
+const bigLoseMessage = "AI win the game ! Too bad !\n\nDo you want to play again ?";
 
 // Initialization
 alert("Welcome to Jules's Shi Fu Mi game !");
@@ -35,9 +43,10 @@ gameLoop();
 
 // Game Loop's logic goes here
 function gameLoop(){    
+    checkForWinner();
     playerInput = askShiFuMi();
     aiInput = aiShiFuMi();
-    compareShiFuMi(playerInput,aiInput);
+    ShiFuMi(playerInput,aiInput);
 }
 
 // Ask name and restrict user to a name between 2 and 20 chars. 
@@ -73,49 +82,73 @@ function aiShiFuMi(){
     return entryArr[random];
 }
 
+function checkForWinner(){
+    if (playerScore >= roundToWin){
+        let checkBox = confirm(bigWinMessage); // Reset score and round and update turn if player wants to replay. Leave window tab if player wants to leave
+            if (checkBox){
+                playerScore = 0;
+                aiScore = 0;
+                round = 0;
+                playerBigScore++;
+                turn++;
+                gameLoop();
+            } else {
+                alert(leaveMessage);
+                window.close();
+            }
+    } else if (aiScore >= roundToWin){
+        let checkBox = confirm(bigLoseMessage);
+        if (checkBox){
+            playerScore = 0;
+            aiScore = 0;
+            aiBigScore++;
+            gameLoop();
+        } else {
+            alert(leaveMessage);
+            window.close();
+        }
+    }
+}
+
 // Check player and ai input and update score
 // Returns either "win" "draw" "lose"
 
 // New, beautiful and glorious compare function
-function compareShiFuMi(playerSFM,aiSFM){
+function ShiFuMi(playerSFM,aiSFM){
     // 0 = rock / 1 = paper / 2 = scissors
     // if player win or lose a confirm prompt ask him if he wants to play again or leave
-    // For some reason using ${} to put playerScore in the message string doesn't update the score.
-    let choices = "\n\nYou : " + playerSFM + " VS " + aiSFM + " : AI\n\n";
-    let showScore = "Your current score : "; // Cannot add playerScore here or it's not updated on time
+    // For some reason using ${} to put playerScore or aiScore in the message string doesn't update the score.
+    let choices = "\n\n" + playerName + " : " + playerSFM + " VS " + aiSFM + " : AI\n\n";
+    let showTurn = "Turn : ";
+    let showRound = "\nRound : ";
+    let showScore = "\n\nYour current score : "; // Cannot add Score var here or it's not updated on time
+    let showAiScore = "\nAI current score : "; 
 
     if (playerSFM === aiSFM){
-        alert(showScore + playerScore + choices + "It's a draw !");
+        alert(showTurn + turn + showRound + round + showScore + playerScore + choices + "It's a draw !");
+        turn++;
         gameLoop();
     }
     for (let i = 0; i < entryCheck.length; i++){
         if (playerSFM === entryCheck[i].entry){
             if (aiSFM === entryCheck[i].win){
                 playerScore++;
-                let checkBox = confirm(showScore + playerScore + choices + winMessage);
-                if (checkBox){
-                    gameLoop();
-                } else {
-                    alert( showScore + leaveMessage);
-                    return;
-                }
+                turn++
+                alert(showTurn + turn + showRound + round + showScore + playerScore + showAiScore+ aiScore + choices + winMessage)
+                gameLoop();
             } else {
-                let checkBox = confirm(showScore + playerScore + choices + loseMessage);
-                if (checkBox){
-                    gameLoop();
-                } else {
-                    alert( showScore + playerScore + leaveMessage);
-                    return;
-                }
+                aiScore++;
+                turn++;
+                alert(showTurn + turn + showRound + round + showScore + playerScore + showAiScore + aiScore + choices + loseMessage)
+                gameLoop();
             }
         }
     }
 }
 
+// Old stinky and ugly function. I'm letting this here to scare the childrens
 
-// Old stinky and ugly function.
-
-/*function compareShiFuMi(playerSFM,aiSFM){
+/*function ShiFuMi(playerSFM,aiSFM){
     // 0 = rock / 1 = paper / 2 = scissors
     // if player win or lose a confirm prompt ask him if he wants to play again or leave
     // For some reason using ${} to put playerScore in the message string doesn't update the score.
