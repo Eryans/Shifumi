@@ -1,9 +1,9 @@
 <style>
-.colored{
+h1{
   color : "blue";
   }
 </style>
-<h1 class="colored">Shi Fu Mi</h1>
+<h1>Shi Fu Mi</h1>
 <p>A simple Shi Fu Mi game made in Javascript for a homework. <br>
   I tried to write it in a way that makes it easily improvable</p>
 <br>
