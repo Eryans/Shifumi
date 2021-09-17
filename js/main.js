@@ -101,7 +101,9 @@ function checkForWinner(){
         if (checkBox){
             playerScore = 0;
             aiScore = 0;
+            round = 0;
             aiBigScore++;
+            turn++;
             gameLoop();
         } else {
             alert(leaveMessage);
@@ -125,7 +127,7 @@ function ShiFuMi(playerSFM,aiSFM){
     let showAiScore = "\nAI current score : "; 
 
     if (playerSFM === aiSFM){
-        turn++;
+        round++;
         alert(showTurn + turn + showRound + round + showScore + playerScore + choices + "It's a draw !");
         gameLoop();
     }
@@ -133,12 +135,12 @@ function ShiFuMi(playerSFM,aiSFM){
         if (playerSFM === entryCheck[i].entry){
             if (aiSFM === entryCheck[i].win){
                 playerScore++;
-                turn++
+                round++
                 alert(showTurn + turn + showRound + round + showScore + playerScore + showAiScore+ aiScore + choices + winMessage)
                 gameLoop();
             } else {
                 aiScore++;
-                turn++;
+                round++;
                 alert(showTurn + turn + showRound + round + showScore + playerScore + showAiScore + aiScore + choices + loseMessage)
                 gameLoop();
             }
