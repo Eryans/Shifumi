@@ -125,8 +125,8 @@ function ShiFuMi(playerSFM,aiSFM){
     let showAiScore = "\nAI current score : "; 
 
     if (playerSFM === aiSFM){
-        alert(showTurn + turn + showRound + round + showScore + playerScore + choices + "It's a draw !");
         turn++;
+        alert(showTurn + turn + showRound + round + showScore + playerScore + choices + "It's a draw !");
         gameLoop();
     }
     for (let i = 0; i < entryCheck.length; i++){
