@@ -84,8 +84,8 @@ function aiShiFuMi(){
 
 function checkForWinner(){
     if (playerScore >= roundToWin){
-        let checkBox = confirm(bigWinMessage); // Reset score and round and update turn if player wants to replay. Leave window tab if player wants to leave
-            if (checkBox){
+        let checkBox = confirm(bigWinMessage); 
+            if (checkBox){ // Reset score and round and update turn if player wants to replay. Leave window tab if player wants to leave
                 playerScore = 0;
                 aiScore = 0;
                 round = 0;
@@ -117,15 +117,16 @@ function checkForWinner(){
 function ShiFuMi(playerSFM,aiSFM){
     // 0 = rock / 1 = paper / 2 = scissors
     // For some reason using ${} to put playerScore or aiScore in the message string doesn't update the score.
+    const separation = "                                                                               ";
     let choices = "\n\n" + playerName + " : " + playerSFM + " VS " + aiSFM + " : AI\n\n";
-    let showTurn = "Turn : ";
+    let showTurn = "\nTurn : ";
     let showRound = "\nRound : ";
     let showScore = "\n\nYour current score : "; // Cannot add Score var here or it's not updated on time
     let showAiScore = "\nAI current score : "; 
 
     if (playerSFM === aiSFM){
-        round++;
-        alert(showTurn + turn + showRound + round + showScore + playerScore + choices + "It's a draw !");
+        round++; // Why do i have to write this big a** long alert for it to work ? 
+        alert(playerName + ": " + playerBigScore + separation + aiBigScore + ": AI" + showTurn + turn + showRound + round + showScore + playerScore + showAiScore + aiScore + choices + "It's a draw !");
         gameLoop();
     }
     for (let i = 0; i < entryCheck.length; i++){
@@ -133,12 +134,12 @@ function ShiFuMi(playerSFM,aiSFM){
             if (aiSFM === entryCheck[i].win){
                 playerScore++;
                 round++
-                alert(showTurn + turn + showRound + round + showScore + playerScore + showAiScore+ aiScore + choices + winMessage)
+                alert(playerName + ": " + playerBigScore + separation + aiBigScore + ": AI"+ showTurn + turn + showRound + round + showScore + playerScore + showAiScore+ aiScore + choices + winMessage)
                 gameLoop();
             } else {
                 aiScore++;
                 round++;
-                alert(showTurn + turn + showRound + round + showScore + playerScore + showAiScore + aiScore + choices + loseMessage)
+                alert(playerName + ": " + playerBigScore + separation + aiBigScore + ": AI" + showTurn + turn + showRound + round + showScore + playerScore + showAiScore + aiScore + choices + loseMessage)
                 gameLoop();
             }
         }
