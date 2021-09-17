@@ -1,10 +1,25 @@
 let playerName = "";
 let playerInput;
-var playerScore = 0;
+let playerScore = 0;
 
 let aiInput;
+let aiScore = 0;
 
 const entryArr = ["rock","paper","scissors"];
+const entryCheck = [{
+    entry : entryArr[0],
+    win : entryArr[2],
+    lose : entryArr[1]
+},{
+    entry : entryArr[1],
+    win : entryArr[0],
+    lose : entryArr[2]
+},{
+    entry : entryArr[2],
+    win : entryArr[1],
+    lose : entryArr[0]
+}];
+
 let winMessage = "\n\nYou win ! :D\nPlay again ?";
 let loseMessage = "\n\nYou lose :(\nPlay again ?";
 let drawMessage = "\n\nIt's a draw !";
@@ -60,7 +75,47 @@ function aiShiFuMi(){
 
 // Check player and ai input and update score
 // Returns either "win" "draw" "lose"
+
+// New, beautiful and glorious compare function
 function compareShiFuMi(playerSFM,aiSFM){
+    // 0 = rock / 1 = paper / 2 = scissors
+    // if player win or lose a confirm prompt ask him if he wants to play again or leave
+    // For some reason using ${} to put playerScore in the message string doesn't update the score.
+    let choices = "\n\nYou : " + playerSFM + " VS " + aiSFM + " : AI\n\n";
+    let showScore = "Your current score : "; // Cannot add playerScore here or it's not updated on time
+
+    if (playerSFM === aiSFM){
+        alert(showScore + playerScore + choices + "It's a draw !");
+        gameLoop();
+    }
+    for (let i = 0; i < entryCheck.length; i++){
+        if (playerSFM === entryCheck[i].entry){
+            if (aiSFM === entryCheck[i].win){
+                playerScore++;
+                let checkBox = confirm(showScore + playerScore + choices + winMessage);
+                if (checkBox){
+                    gameLoop();
+                } else {
+                    alert( showScore + leaveMessage);
+                    return;
+                }
+            } else {
+                let checkBox = confirm(showScore + playerScore + choices + loseMessage);
+                if (checkBox){
+                    gameLoop();
+                } else {
+                    alert( showScore + playerScore + leaveMessage);
+                    return;
+                }
+            }
+        }
+    }
+}
+
+
+// Old stinky and ugly function.
+
+/*function compareShiFuMi(playerSFM,aiSFM){
     // 0 = rock / 1 = paper / 2 = scissors
     // if player win or lose a confirm prompt ask him if he wants to play again or leave
     // For some reason using ${} to put playerScore in the message string doesn't update the score.
@@ -130,6 +185,6 @@ function compareShiFuMi(playerSFM,aiSFM){
         }
     } 
 }
-
+*/
 
 
