@@ -113,12 +113,9 @@ function checkForWinner(){
 }
 
 // Check player and ai input and update score
-// Returns either "win" "draw" "lose"
-
 // New, beautiful and glorious compare function
 function ShiFuMi(playerSFM,aiSFM){
     // 0 = rock / 1 = paper / 2 = scissors
-    // if player win or lose a confirm prompt ask him if he wants to play again or leave
     // For some reason using ${} to put playerScore or aiScore in the message string doesn't update the score.
     let choices = "\n\n" + playerName + " : " + playerSFM + " VS " + aiSFM + " : AI\n\n";
     let showTurn = "Turn : ";
