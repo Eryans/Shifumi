@@ -12,11 +12,34 @@
    ========================================================================== */
 
 html {
-  color: #222;
+  color: rgb(221, 221, 221);
+  background: #2e4561;
   font-size: 1em;
   line-height: 1.4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  align-content: center;
 }
 
+#gameTitle{
+  display: bl;
+  border:2px solid black;
+  padding: 15px;
+  margin: 5px;
+  border-radius: 15px;
+  animation: gameTitleRotation alternate infinite 1.5s;
+}
+
+@keyframes gameTitleRotation{
+  0%{
+    transform: rotateZ(-10deg) translateY(1vh);
+  }
+  100%{
+    transform: rotateZ(10deg) translateY(20vh);
+  }
+}
 /*
  * Remove text-shadow in selection highlight:
  * https://twitter.com/miketaylr/status/12228805301
@@ -28,12 +51,12 @@ html {
  */
 
 ::-moz-selection {
-  background: #b3d4fc;
+  background: #2e4561;
   text-shadow: none;
 }
 
 ::selection {
-  background: #b3d4fc;
+  background: #1a304d;
   text-shadow: none;
 }
 
