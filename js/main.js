@@ -67,18 +67,16 @@ function askShiFuMi(){
     for (let i = 0; i < entryArr.length;i++){
         if (entry.toLocaleLowerCase() === entryArr[i]){
             return entryArr[i];
-            // returning array value to avoid error in futur check
+            // returning array value to avoid error in futur check and removing possibility of capital letter error
         }
     }
-    // iterating throught an array with the possible answer 
-    // and removing possibility of capital letter error
     alert("Entry was incorrect.\nPlease try again.")
     askShiFuMi();
 }
 
 // Returns rock,paper,scissors randomly
 function aiShiFuMi(){
-    let random = Math.floor(Math.random() * 3);
+    let random = Math.floor(Math.random() * 3); //Using Math.floor instead of round to avoid returning a 3 which crashes the game
     return entryArr[random];
 }
 
@@ -113,7 +111,7 @@ function checkForWinner(){
 // Check player and ai input and update score
 // New, beautiful and glorious compare function
 function ShiFuMi(playerSFM,aiSFM){
-    // 0 = rock / 1 = paper / 2 = scissors
+    // MEMO : 0 = rock / 1 = paper / 2 = scissors 
     // For some reason using ${} to put playerScore or aiScore in the message string doesn't update the score.
     const separation = "                                                                               ";
     let choices = "\n\n" + playerName + " : " + playerSFM + " VS " + aiSFM + " : AI\n\n";
@@ -122,7 +120,7 @@ function ShiFuMi(playerSFM,aiSFM){
     let showAiScore = "\nAI current score : "; 
 
     if (playerSFM === aiSFM){
-        round++; // Why do i have to write this big a** long alert for it to work ? 
+        round++; // Why do i have to write this big a** long alert for them to work properly ? 
         alert(playerName + ": " + playerBigScore + separation + aiBigScore + ": AI" + showRound + round + showScore + playerScore + showAiScore + aiScore + choices + "It's a draw !");
         gameLoop();
     }
@@ -143,7 +141,7 @@ function ShiFuMi(playerSFM,aiSFM){
     }
 }
 
-// Old stinky and ugly function. I'm letting this here to scare the childrens
+// Old stinky and ugly ShiFuMi function. I'm letting this here to scare the childrens
 
 /*function ShiFuMi(playerSFM,aiSFM){
     // 0 = rock / 1 = paper / 2 = scissors
