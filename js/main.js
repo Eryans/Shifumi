@@ -36,7 +36,7 @@ const bigLoseMessage = "AI win the game ! Too bad !\n\nDo you want to play again
 // Initialization
 alert("Welcome to Jules's Shi Fu Mi game !");
 playerName = askName();
-alert(`Welcome ${playerName} !\nYou will play Shi Fu Mi against my super intelligent AI today !`);
+alert(`Welcome ${playerName} !\nYou will play Shi Fu Mi against my super intelligent AI today !\nYou must win 3 round to score !`);
 // Loop
 gameLoop();  
 
