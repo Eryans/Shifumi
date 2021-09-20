@@ -33,13 +33,6 @@ const bigLoseMessage = "AI win the game ! Too bad !\n\nDo you want to play again
 
 /* -----------------------------Function------------------------------------------ */
 
-// Game Loop's logic goes here
-function gameLoop(){    
-    checkForWinner();
-    playerInput = askShiFuMi();
-    aiInput = aiShiFuMi();
-    ShiFuMi(playerInput,aiInput);
-}
 // Ask name and restrict user to a name between 2 and 20 chars. 
 function askName(){
     let name = prompt("What is your name ? ( must be between 2 and 20 characters. )");
@@ -129,9 +122,13 @@ function ShiFuMi(playerSFM,aiSFM){
         }
     }
 }
-
 /*----------------------------Logic--------------------------- */
-
+function gameLoop(){    
+    checkForWinner();
+    playerInput = askShiFuMi();
+    aiInput = aiShiFuMi();
+    ShiFuMi(playerInput,aiInput);
+}
 alert("Welcome to Jules's Shi Fu Mi game !");
 playerName = askName();
 alert(`Welcome ${playerName} !\nYou will play Shi Fu Mi against my super intelligent AI today !\nYou must win 3 round to score !`);
