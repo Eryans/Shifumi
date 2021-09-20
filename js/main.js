@@ -14,13 +14,13 @@ const roundToWin = 3;
 const entryArr = ["rock","paper","scissors"];
 const entryCheck = [{
     entry : entryArr[0],
-    win : entryArr[2]
+    winTo : entryArr[2]
 },{
     entry : entryArr[1],
-    win : entryArr[0]
+    winTo : entryArr[0]
 },{
     entry : entryArr[2],
-    win : entryArr[1]
+    winTo : entryArr[1]
 }];
 
 const winMessage = "\n\nYou win this round !";
@@ -52,7 +52,7 @@ function askName(){
 }
 // Ask for player's input 
 function askShiFuMi(){
-    let entry = prompt("Choose : Rock, Paper, or Scissors ?\nYou must type your selection")
+    let entry = prompt("Choose : " + entryArr.join(" or ") + "?\nYou must type your selection")
     for (let i = 0; i < entryArr.length;i++){
         if (entry.toLocaleLowerCase() === entryArr[i]){
             return entryArr[i];
@@ -73,7 +73,7 @@ function reset(){
     round = 0;
 }
 // Reset score and round and update turn if player wants to replay. 
-// Leave window tab if player wants to leave
+// Leave browser tab if player wants to leave
 function checkForWinner(){
     if (playerScore >= roundToWin){
         let checkBox = confirm(bigWinMessage); 
@@ -109,24 +109,23 @@ function ShiFuMi(playerSFM,aiSFM){
 
     if (playerSFM === aiSFM){
         round++; // Why do i have to write this big a** long alert for them to work properly ? 
-        alert(playerName + ": " + playerBigScore + separation + aiBigScore + ": AI" + showRound + round + showScore + playerScore + showAiScore + aiScore + choices + "It's a draw !");
+        alert(playerName + ": " + playerBigScore + separation + aiBigScore + ": AI" + showRound + round +
+        showScore + playerScore + showAiScore + aiScore + choices + "It's a draw !");
         gameLoop();
     }
     for (let i = 0; i < entryCheck.length; i++){
-        if (playerSFM === entryCheck[i].entry){
-            if (aiSFM === entryCheck[i].win){
-                playerScore++;
-                round++
-                alert(playerName + ": " + playerBigScore + separation + aiBigScore + ": AI"+
-                 showRound + round + showScore + playerScore + showAiScore+ aiScore + choices + winMessage)
-                gameLoop();
-            } else {
-                aiScore++;
-                round++;
-                alert(playerName + ": " + playerBigScore + separation + aiBigScore + ": AI"+
-                 showRound + round + showScore + playerScore + showAiScore + aiScore + choices + loseMessage)
-                gameLoop();
-            }
+        if (playerSFM === entryCheck[i].entry && aiSFM === entryCheck[i].winTo){
+            playerScore++;
+            round++
+            alert(playerName + ": " + playerBigScore + separation + aiBigScore + ": AI"+
+            showRound + round + showScore + playerScore + showAiScore+ aiScore + choices + winMessage)
+            gameLoop();
+         } else {
+            aiScore++;
+            round++;
+            alert(playerName + ": " + playerBigScore + separation + aiBigScore + ": AI"+
+            showRound + round + showScore + playerScore + showAiScore + aiScore + choices + loseMessage)
+            gameLoop();
         }
     }
 }
