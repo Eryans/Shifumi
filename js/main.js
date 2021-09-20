@@ -1,4 +1,4 @@
-// !! Code rewrote during exercice correction !!
+/* !! Code rewrote during exercice correction !! */
 let playerName = "";
 let playerInput;
 let playerScore = 0;
@@ -10,7 +10,7 @@ let aiBigScore = 0;
 
 
 let round = 0;
-const roundToWin = 3;
+const scoreToWin = 3;
 const entryArr = ["rock","paper","scissors"];
 const entryCheck = [{
     entry : entryArr[0],
@@ -68,7 +68,7 @@ function reset(){
 // Reset score and round and update turn if player wants to replay. 
 // Leave browser tab if player wants to leave
 function checkForWinner(){
-    if (playerScore >= roundToWin){
+    if (playerScore >= scoreToWin){
         let checkBox = confirm(bigWinMessage); 
             if (checkBox){ 
                 reset();
@@ -78,7 +78,7 @@ function checkForWinner(){
                 alert(leaveMessage);
                 window.close();
             }
-    } else if (aiScore >= roundToWin){
+    } else if (aiScore >= scoreToWin){
         let checkBox = confirm(bigLoseMessage);
         if (checkBox){
             reset();
@@ -96,31 +96,29 @@ function ShiFuMi(playerSFM,aiSFM){
     // For some reason using ${} to put playerScore or aiScore in the message string doesn't update the score.
     const separation = "                                                               ";
     let choices = "\n\n" + playerName + " : " + playerSFM + " VS " + aiSFM + " : AI\n\n";
-    let showRound = "\nRound : ";
-    let showScore = "\n\nYour current score : "; // Cannot add Score var here or it's not updated on time
-    let showAiScore = "\nAI current score : "; 
+    let finalMessage = "";
+    let playerWin = false;
 
+    round++;
     if (playerSFM === aiSFM){
-        round++; // Why do i have to write this big a** long alert for them to work properly ? 
-        alert(playerName + ": " + playerBigScore + separation + aiBigScore + ": AI" + showRound + round +
-        showScore + playerScore + showAiScore + aiScore + choices + "It's a draw !");
-        gameLoop();
-    }
-    for (let i = 0; i < entryCheck.length; i++){
-        if (playerSFM === entryCheck[i].entry && aiSFM === entryCheck[i].winTo){
+        finalMessage = "it's a draw !";
+    } else {
+        for (let i = 0; i < entryCheck.length; i++){
+            if (playerSFM === entryCheck[i].entry && aiSFM === entryCheck[i].winTo){
+                playerWin = true;
+            } 
+        }
+        if (playerWin){
             playerScore++;
-            round++
-            alert(playerName + ": " + playerBigScore + separation + aiBigScore + ": AI"+
-            showRound + round + showScore + playerScore + showAiScore+ aiScore + choices + winMessage)
-            gameLoop();
-         } else {
+            finalMessage = winMessage;
+        } else {
             aiScore++;
-            round++;
-            alert(playerName + ": " + playerBigScore + separation + aiBigScore + ": AI"+
-            showRound + round + showScore + playerScore + showAiScore + aiScore + choices + loseMessage)
-            gameLoop();
+            finalMessage = loseMessage;
         }
     }
+    alert(playerName + ": " + playerBigScore + separation + aiBigScore + ": AI"+
+    "\nRound : " + round + "\n\nYour current score : " + playerScore + "\nAI current score : " + aiScore + choices + finalMessage);
+    gameLoop();
 }
 /*----------------------------Logic--------------------------- */
 function gameLoop(){    
